@@ -2,13 +2,12 @@ unit TypeDonnees;
 
 interface
 
-// Interface section: declare public types, variables, constants
+Type Theme = (spring, summer, autumn, winter);
 
-type Theme = (spring, summer, autumn, winter);
-
-type Difficulte = (facile, moyen, difficile);
+Type Difficulte = (facile, moyen, difficile);
 
 Type TMot = Record
+    chaine: String;
     lettres: Array of Char;
     cache: Array of Boolean;
     longueurMot: Integer;
@@ -20,6 +19,13 @@ Type TResultat = Record
     mot: String;
 end;
 
+const UP = #72;
+const DOWN = #80;
+const LEFT = #75;
+const RIGHT = #77;
+const ENTER = #13;
+const DEL = #8;
+const ESC = #27;
 
 implementation
 
