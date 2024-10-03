@@ -2,13 +2,12 @@ unit TypeDonnees;
 
 interface
 
-Type Theme = (light, dark, github, high_contrast);
+Type TTheme = (light, dark, high_contrast);
 
-Type Difficulte = (facile, moyen, difficile);
+Type TDifficulte = (facile, moyen, difficile);
 
 Type TMot = Record
     chaine: String;
-    lettres: Array of Char;
     cache: Array of Boolean;
     longueurMot: Integer;
 end;

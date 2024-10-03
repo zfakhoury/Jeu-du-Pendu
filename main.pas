@@ -1,18 +1,18 @@
 program main;
 
-uses crt, partie, parametres, typeDonnees;
+uses crt, partie, parametres, typeDonnees, animation;
 
 var input: Integer;
-var mode: Difficulte;
+var mode: TDifficulte;
+var theme: TTheme;
 
 begin
-    TextBackground(white);
-    ClrScr;
-    TextColor(black);
+    theme := dark;
 
     repeat
         begin
-            writeln('Bienvenu au jeu du Pendu!');
+            ClrScr;
+            animate('Bienvenu au jeu du Pendu 🫥');
             writeln('');
             writeln('1. Lancer une partie');
             writeln('2. Paramètres');
@@ -20,7 +20,6 @@ begin
             writeln('');
             write('Entrée: ');
             read(input);
-            
             ClrScr;
 
             if input = 1 then
@@ -29,9 +28,13 @@ begin
                     partieJeu(mode);
                 end
             else if input = 2 then
-                parametresJeu()
+                parametresJeu(theme)
             else if input <> 3 then
-                writeln('Saisie incorrecte.');
+                begin
+                    ClrScr;
+                    animate('❌ Saisie incorrecte...');
+                    delay(750);
+                end;
         end;
 
     until input = 3; 

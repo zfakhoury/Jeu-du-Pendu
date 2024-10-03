@@ -1,5 +1,6 @@
 *
 !*.pas
-!*.gitignore
-!*analyse-descendante.png
-!*cahier-des-charges.pdf
+test.pas
+!.gitignore
+!analyse-descendante.png
+!cahier-des-charges.pdf

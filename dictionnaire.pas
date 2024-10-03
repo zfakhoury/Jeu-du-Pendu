@@ -2,9 +2,9 @@ unit Dictionnaire;
 
 interface
 
-type Tfacile = Array[1..10] of String;
-type Tmoyen = Array[1..10] of String;
-type Tdifficile = Array[1..10] of String;
+Type Tfacile = Array[1..10] of String;
+Type Tmoyen = Array[1..10] of String;
+Type Tdifficile = Array[1..10] of String;
 
 const motsFaciles: Tfacile = (
     'chat', 'chien', 'maison', 'voiture', 'pomme',
@@ -12,13 +12,13 @@ const motsFaciles: Tfacile = (
   );
 
 const motsMoyens: Tmoyen = (
-    'ordinateur', 'bibliothèque', 'restaurant', 'télévision', 'chocolat',
-    'jardin', 'école', 'hôpital', 'musée', 'cinéma'
+    'ordinateur', 'bibliotheque', 'restaurant', 'television', 'chocolat',
+    'jardin', 'ecole', 'hopital', 'musee', 'cinema'
   );
 
 const motsDifficiles: Tdifficile = (
     'philosophie', 'psychologie', 'architecture', 'astronomie', 'biotechnologie',
-    'météorologie', 'archéologie', 'anthropologie', 'neurologie', 'généalogie'
+    'meteorologie', 'archeologie', 'anthropologie', 'neurologie', 'genealogie'
   );
 
 implementation
