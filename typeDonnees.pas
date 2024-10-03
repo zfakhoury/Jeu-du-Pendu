@@ -2,7 +2,7 @@ unit TypeDonnees;
 
 interface
 
-Type Theme = (spring, summer, autumn, winter);
+Type Theme = (light, dark, github, high_contrast);
 
 Type Difficulte = (facile, moyen, difficile);
 

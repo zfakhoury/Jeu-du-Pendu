@@ -9,9 +9,10 @@ begin
     TextBackground(white);
     ClrScr;
     TextColor(black);
-    writeln('Bienvenu au jeu du Pendu');
+
     repeat
         begin
+            writeln('Bienvenu au jeu du Pendu!');
             writeln('');
             writeln('1. Lancer une partie');
             writeln('2. Paramètres');
@@ -25,11 +26,10 @@ begin
             if input = 1 then
                 begin
                     modeDifficulte(mode);
-                    writeln(mode);
-                    partieJeu(spring, mode);
+                    partieJeu(mode);
                 end
             else if input = 2 then
-                parametresJeu(spring)
+                parametresJeu()
             else if input <> 3 then
                 writeln('Saisie incorrecte.');
         end;
