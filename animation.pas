@@ -22,4 +22,5 @@ procedure animate(texte: String; time: Integer; skipLine: Boolean);
             writeln('');
     end;
 
+
 end.

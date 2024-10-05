@@ -35,6 +35,7 @@ function initMot(mode: TDifficulte): TMot;
             initMot.cache[i] := True;
     end;
 
+
 procedure modeDifficulte(var mode: TDifficulte);
     var input: Integer;
 
@@ -69,8 +70,6 @@ procedure modeDifficulte(var mode: TDifficulte);
                 end;
         until (input >= 1) and (input <= 3);
     end;
-
-
 
 
 procedure partieJeu(mode: TDifficulte);
@@ -196,6 +195,7 @@ procedure updateTentatives(valide: Boolean; key: Char; pressedKeys: TPressed; va
                 tentatives := tentatives + 1;
     end;
 
+
 function partieGagnee(mot: TMot): Boolean;
     var i: Integer;
 
@@ -211,6 +211,7 @@ function partieGagnee(mot: TMot): Boolean;
 
     end;
 
+
 function entreeValide(key: Char; mot: TMot): Boolean;
     var i: Integer;
 
@@ -224,5 +225,6 @@ function entreeValide(key: Char; mot: TMot): Boolean;
                     entreeValide := True;
                 end
     end;
+
 
 end.

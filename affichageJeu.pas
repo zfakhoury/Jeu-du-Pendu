@@ -27,6 +27,7 @@ procedure afficherPressedLettres(key: Char; var pressedKeys: TPressed);
             end;
     end;
 
+
 procedure afficherMot(valide: Boolean; mot: TMot);
     var i: Integer;
 
@@ -37,6 +38,7 @@ procedure afficherMot(valide: Boolean; mot: TMot);
             else
                 write(UpCase(mot.chaine[i]), ' ');
     end;
+
 
 procedure afficherPendu(tentatives: Integer);
     begin
@@ -98,4 +100,5 @@ procedure afficherPendu(tentatives: Integer);
         writeln('__|__');
     end;
     
+
 end.
