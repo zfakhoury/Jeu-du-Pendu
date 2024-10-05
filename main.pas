@@ -12,13 +12,13 @@ begin
     repeat
         begin
             ClrScr;
-            animate('Bienvenu au jeu du Pendu 🫥');
+            animate('Bienvenu au Jeu du Pendu 🫥', 50, True);
             writeln('');
             writeln('1. Lancer une partie');
             writeln('2. Paramètres');
             writeln('3. Quitter');
             writeln('');
-            write('Entrée: ');
+            write('>>> ');
             read(input);
             ClrScr;
 
@@ -32,10 +32,10 @@ begin
             else if input <> 3 then
                 begin
                     ClrScr;
-                    animate('❌ Saisie incorrecte...');
+                    animate('❌ Saisie incorrecte...', 50, False);
                     delay(750);
                 end;
         end;
 
-    until input = 3; 
+    until input = 3;
 end.

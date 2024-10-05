@@ -6,6 +6,13 @@ Type TTheme = (light, dark, high_contrast);
 
 Type TDifficulte = (facile, moyen, difficile);
 
+Type TPressed = Array[1..26] of Boolean;
+
+Type TLettres = Record 
+    lettres: Array of Char;
+    n: Integer;
+end;
+
 Type TMot = Record
     chaine: String;
     cache: Array of Boolean;

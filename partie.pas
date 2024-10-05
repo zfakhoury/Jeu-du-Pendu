@@ -9,7 +9,7 @@ function initMot(mode: TDifficulte): TMot;
 procedure modeDifficulte(var mode: TDifficulte);
 function entreeValide(key: Char; mot: TMot): Boolean;
 procedure updateTMot(key: Char; var mot: TMot);
-procedure updateTentatives(valide: Boolean; var tentatives: Integer);
+procedure updateTentatives(valide: Boolean; key: Char; pressedKeys: TPressed; var tentatives: Integer);
 function partieGagnee(mot: TMot): Boolean;
 
 implementation
@@ -41,7 +41,7 @@ procedure modeDifficulte(var mode: TDifficulte);
     begin
         repeat
             ClrScr;
-            animate('🤔 DIFFICULTÉ');
+            animate('🤔 DIFFICULTÉ', 50, True);
             writeln('');
             writeln('1. Facile  2. Moyen  3. Difficile');
             writeln('');
@@ -64,49 +64,55 @@ procedure modeDifficulte(var mode: TDifficulte);
             else
                 begin
                     ClrScr;
-                    animate('❌ Saisie incorrecte...');
+                    animate('❌ Saisie incorrecte...', 50, False);
                     delay(750);
                 end;
         until (input >= 1) and (input <= 3);
     end;
 
-procedure afficherJeu(valide: Boolean; mot: TMot);
-    begin
-        afficherMot(True, mot);
-    end;
+
 
 
 procedure partieJeu(mode: TDifficulte);
     var mot: TMot;
     var key: Char;
-    var running: Boolean;
     var valide: Boolean;
-    var tentatives: Integer;
+    var tentatives, i: Integer;
+    var pressedKeys: TPressed;
 
     begin
-        ClrScr;
         tentatives := 0;
-        mot := initMot(mode);
         valide := False;
+        key := #0;
+        mot := initMot(mode);
+
+        for i := 1 to 26 do
+            pressedKeys[i] := False;
+
+        ClrScr;
 
         while True do
             begin
                 ClrScr;
                 writeln('> Utiliser le clavier pour ajouter des lettres.');
                 writeln('> Appuyer sur ESC pour quitter.');
-
+                
                 GotoXY(1, 4);
                 afficherPendu(tentatives);
                 GotoXY(20, 8);
                 afficherMot(valide, mot);
+                GotoXY(40, 4);
+                write('Vies restantes: ', 6 - tentatives);
+                GotoXY(40, 6);
+                afficherPressedLettres(key, pressedKeys);
 
                 if partieGagnee(mot) then
                     begin
                         delay(2000);
                         ClrScr;
-                        animate('Partie gagnée 🏆');
+                        animate('Partie gagnée 🏆', 50, True);
                         writeln('');
-                        animate('Vous avez deviné ' + UpCase(mot.chaine));
+                        animate('Vous avez deviné ' + UpCase(mot.chaine), 50, False);
                         delay(3000);
                         break;
                     end
@@ -114,43 +120,52 @@ procedure partieJeu(mode: TDifficulte);
                     begin
                         delay(2000);
                         ClrScr;
-                        animate('Partie perdue 💀');
+                        animate('Partie perdue 💀', 50, True);
                         writeln('');
-                        animate('Le mot était ' + UpCase(mot.chaine));
+                        animate('Le mot était ' + UpCase(mot.chaine), 50, False);
                         delay(3000);
                         break;
                     end;
 
                 key := ReadKey;
-
+                
                 case key of
-                #0:
-                    begin
-                        // Pour l'instant on va uniquement lire les lettres
+                    #0:
+                        begin
+                            // Pour l'instant on va uniquement lire les lettres
 
-                        // ch := ReadKey;
-                        // case ch of
-                        // UP: if y > 1 then y := y - 1;
-                        // DOWN: if y < 25 then y := y + 1;
-                        // LEFT: if x > 1 then x := x - 1;
-                        // RIGHT: if x < 80 then x := x + 1;
-                        // end;
-                    end;
-                ESC:
-                    begin
-                        ClrScr;
-                        animate('🚪 Exiting...');
-                        delay(750);
-                        break;
-                    end;
+                            // ch := ReadKey;
+                            // case ch of
+                            // UP: if y > 1 then y := y - 1;
+                            // DOWN: if y < 25 then y := y + 1;
+                            // LEFT: if x > 1 then x := x - 1;
+                            // RIGHT: if x < 80 then x := x + 1;
+                            // end;
+                        end;
+                    ESC:
+                        begin
+                            ClrScr;
+                            animate('🚪 Exiting...', 50, False);
+                            for i := 1 to 2 do
+                                begin
+                                    delay(500);
+                                    ClrScr;
+                                    write('🚪 Exitin');
+                                    animate('g...', 100, False);
+                                end;
+                            delay(750);
+                            break;
+                        end;
 
-                #97..#122:  // Charactères ASCII de a à z (minuscule)
-                    begin
-                        valide := entreeValide(key, mot);
-                        writeln(valide);
-                        updateTMot(key, mot);
-                        updateTentatives(valide, tentatives);
-                    end;
+                    #97..#122:  // Charactères ASCII de a à z (minuscule)
+                        begin
+                            valide := entreeValide(key, mot);
+                            updateTMot(key, mot);
+                            updateTentatives(valide, key, pressedKeys, tentatives);
+                            GotoXY(1, 1);
+                        end;
+                    else continue;
+
                 end;
 
             end;
@@ -170,10 +185,15 @@ procedure updateTMot(key: Char; var mot: TMot);
     end;
 
 
-procedure updateTentatives(valide: Boolean; var tentatives: Integer);
+procedure updateTentatives(valide: Boolean; key: Char; pressedKeys: TPressed; var tentatives: Integer);
+    var i, index: Integer;
+
     begin
-        if valide then
-            tentatives := tentatives + 1;
+        index := ord(key) - ord('a') + 1;
+
+        if not(valide) then
+            if not(pressedKeys[index]) then
+                tentatives := tentatives + 1;
     end;
 
 function partieGagnee(mot: TMot): Boolean;
@@ -196,9 +216,13 @@ function entreeValide(key: Char; mot: TMot): Boolean;
 
     begin
         entreeValide := False;
+
         for i := 1 to mot.longueurMot do
-            if (key = mot.chaine[i]) and (mot.cache[i] = True) then
+            if key = mot.chaine[i] then
+                begin
                     mot.cache[i] := False;
+                    entreeValide := True;
+                end
     end;
 
 end.
