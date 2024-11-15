@@ -1,6 +1,19 @@
+# Ignore all files by default
 *
+
+# Do not ignore specific file types
 !*.pas
-test.pas
+!*.png
+!*.pdf
+
+# Do not ignore specific files
+!README.md
 !.gitignore
-!analyse-descendante.png
-!cahier-des-charges.pdf
+
+# Do not ignore specific directories
+!Models/
+!Views/
+!Organisation/
+
+# Ignore specific files
+test.pas

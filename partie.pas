@@ -2,7 +2,7 @@ unit Partie;
 
 interface
 
-uses typeDonnees, affichageJeu, dictionnaire, crt, animation;
+uses typeDonnees, affichageJeu, dictionnaire, crt, sysUtils, animation;
 
 procedure partieJeu(mode: TDifficulte);
 function initMot(mode: TDifficulte): TMot;
@@ -11,8 +11,32 @@ function entreeValide(key: Char; mot: TMot): Boolean;
 procedure updateTMot(key: Char; var mot: TMot);
 procedure updateTentatives(valide: Boolean; key: Char; pressedKeys: TPressed; var tentatives: Integer);
 function partieGagnee(mot: TMot): Boolean;
+procedure saveResultat(resultat: TResultat);
 
 implementation
+
+procedure saveResultat(resultat: TResultat);
+    var f: TextFile;
+
+    begin
+        assign(f, 'resultats.txt');
+        if fileExists('resultats.txt') then
+            append(f)
+        else 
+            rewrite(f);
+        
+        writeln(f, DateTimeToStr(Now));
+        writeln(f, UpCase(resultat.mot));
+        writeln(f, resultat.score, ' points');
+        if resultat.gagne then
+            writeln(f, 'Gagné')
+        else 
+            writeln(f, 'Perdu');
+
+        writeln(f, '');
+        
+        close(f);
+    end;
 
 function initMot(mode: TDifficulte): TMot;
     var i: Integer;
@@ -78,6 +102,7 @@ procedure partieJeu(mode: TDifficulte);
     var valide: Boolean;
     var tentatives, i: Integer;
     var pressedKeys: TPressed;
+    var resultat: TResultat;
 
     begin
         tentatives := 0;
@@ -112,6 +137,10 @@ procedure partieJeu(mode: TDifficulte);
                         animate('Partie gagnée 🏆', 50, True);
                         writeln('');
                         animate('Vous avez deviné ' + UpCase(mot.chaine), 50, False);
+                        resultat.score := 10;
+                        resultat.mot := mot.chaine;
+                        resultat.gagne := True;
+                        saveResultat(resultat);
                         delay(3000);
                         break;
                     end
@@ -122,6 +151,10 @@ procedure partieJeu(mode: TDifficulte);
                         animate('Partie perdue 💀', 50, True);
                         writeln('');
                         animate('Le mot était ' + UpCase(mot.chaine), 50, False);
+                        resultat.score := 10;
+                        resultat.mot := mot.chaine;
+                        resultat.gagne := False;
+                        saveResultat(resultat);
                         delay(3000);
                         break;
                     end;
