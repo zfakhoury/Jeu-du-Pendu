@@ -3,7 +3,6 @@ unit Partie;
 interface
 
 uses typeDonnees, affichageJeu, dictionnaire, crt, sysUtils, animation;
-uses typeDonnees, affichageJeu, dictionnaire, crt, sysUtils, animation;
 
 procedure partieJeu(mode: TDifficulte);
 function initMot(mode: TDifficulte): TMot;
@@ -13,32 +12,8 @@ procedure updateTMot(key: Char; var mot: TMot);
 procedure updateTentatives(valide: Boolean; key: Char; pressedKeys: TPressed; var tentatives: Integer);
 function partieGagnee(mot: TMot): Boolean;
 procedure saveResultat(resultat: TResultat);
-procedure saveResultat(resultat: TResultat);
 
 implementation
-
-procedure saveResultat(resultat: TResultat);
-    var f: TextFile;
-
-    begin
-        assign(f, 'resultats.txt');
-        if fileExists('resultats.txt') then
-            append(f)
-        else 
-            rewrite(f);
-        
-        writeln(f, DateTimeToStr(Now));
-        writeln(f, UpCase(resultat.mot));
-        writeln(f, resultat.score, ' points');
-        if resultat.gagne then
-            writeln(f, 'Gagné')
-        else 
-            writeln(f, 'Perdu');
-
-        writeln(f, '');
-        
-        close(f);
-    end;
 
 procedure saveResultat(resultat: TResultat);
     var f: TextFile;
@@ -128,7 +103,6 @@ procedure partieJeu(mode: TDifficulte);
     var tentatives, i: Integer;
     var pressedKeys: TPressed;
     var resultat: TResultat;
-    var resultat: TResultat;
 
     begin
         tentatives := 0;
@@ -163,10 +137,6 @@ procedure partieJeu(mode: TDifficulte);
                         animate('Partie gagnée 🏆', 50, True);
                         writeln('');
                         animate('Vous avez deviné ' + UpCase(mot.chaine), 50, False);
-                        resultat.score := 10;
-                        resultat.mot := mot.chaine;
-                        resultat.gagne := True;
-                        saveResultat(resultat);
                         resultat.score := 10;
                         resultat.mot := mot.chaine;
                         resultat.gagne := True;
