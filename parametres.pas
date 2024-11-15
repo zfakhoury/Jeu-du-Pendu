@@ -2,7 +2,7 @@ unit Parametres;
 
 interface
 
-uses typeDonnees, crt, animation;
+uses typeDonnees, crt, sysUtils, animation;
 
 procedure parametresJeu(theme: TTheme);
 procedure afficherScore(nomFichier: String);
@@ -11,26 +11,54 @@ procedure choisirTheme(var theme: TTheme);
 implementation
 
 procedure afficherScore(nomFichier: String);
-    var resultat: TResultat;
-    var fichier: File of TResultat;
+    var f: TextFile;
+    var ligne: String;
+    var key: Char;
+    var i: Integer;
+
     
     begin
-        assign(fichier, nomFichier);
-        reset(fichier);
+        // while True do
+        //     begin
+        //         ClrScr;
+        //         writeln('> Appuyer sur ESC pour quitter.');
+                
+        //         if not fileExists(nomFichier) then
+        //             animate('Pas de score disponible...', 50, False)
+        //         else 
+        //             begin
+        //                 assign(f, nomFichier);
+        //                 reset(f);
 
-        while not EOF(fichier) do
-            begin
-                read(fichier, resultat);
-                with resultat do
-                    begin
-                        writeln('Mot: ', resultat.mot);
-                        writeln('Score: ', resultat.score);
-                        writeln('Gagné: ', resultat.gagne);
-                        writeln('------------------------');
-                    end;
-            end;
+        //                 while not EOF(f) do
+        //                     begin
+        //                         readln(f, ligne);
+        //                         writeln(ligne);
+        //                     end;
 
-    close(fichier);
+        //                 close(f);
+        //             end;
+
+        //         key := ReadKey;
+        
+        //         case key of
+        //             ESC:
+        //                 begin
+        //                     ClrScr;
+        //                     animate('🚪 Exiting...', 50, False);
+        //                     for i := 1 to 2 do
+        //                         begin
+        //                             delay(500);
+        //                             ClrScr;
+        //                             write('🚪 Exitin');
+        //                             animate('g...', 100, False);
+        //                         end;
+        //                     delay(750);
+        //                     break;
+        //                 end;
+        //         end;
+
+        //     end;
     end;
 
 
@@ -118,7 +146,7 @@ procedure parametresJeu(theme: TTheme);
             ClrScr;
 
             if input = 1 then
-                writeln('Affichage du score...')
+                afficherScore('resultat.txt')
             else if input = 2 then
                 choisirTheme(theme)
             else if input <> 3 then
