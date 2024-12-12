@@ -18,47 +18,47 @@ procedure afficherScore(nomFichier: String);
 
     
     begin
-        // while True do
-        //     begin
-        //         ClrScr;
-        //         writeln('> Appuyer sur ESC pour quitter.');
+        while True do
+            begin
+                ClrScr;
+                writeln('> Appuyer sur ESC pour quitter.');
                 
-        //         if not fileExists(nomFichier) then
-        //             animate('Pas de score disponible...', 50, False)
-        //         else 
-        //             begin
-        //                 assign(f, nomFichier);
-        //                 reset(f);
+                if not fileExists(nomFichier) then
+                    animate('Pas de score disponible...', 50, False)
+                else 
+                    begin
+                        assign(f, nomFichier);
+                        reset(f);
 
-        //                 while not EOF(f) do
-        //                     begin
-        //                         readln(f, ligne);
-        //                         writeln(ligne);
-        //                     end;
+                        while not EOF(f) do
+                            begin
+                                readln(f, ligne);
+                                writeln(ligne);
+                            end;
 
-        //                 close(f);
-        //             end;
+                        close(f);
+                    end;
 
-        //         key := ReadKey;
+                key := ReadKey;
         
-        //         case key of
-        //             ESC:
-        //                 begin
-        //                     ClrScr;
-        //                     animate('🚪 Exiting...', 50, False);
-        //                     for i := 1 to 2 do
-        //                         begin
-        //                             delay(500);
-        //                             ClrScr;
-        //                             write('🚪 Exitin');
-        //                             animate('g...', 100, False);
-        //                         end;
-        //                     delay(750);
-        //                     break;
-        //                 end;
-        //         end;
+                case key of
+                    ESC:
+                        begin
+                            ClrScr;
+                            animate('🚪 Exiting...', 50, False);
+                            for i := 1 to 2 do
+                                begin
+                                    delay(500);
+                                    ClrScr;
+                                    write('🚪 Exitin');
+                                    animate('g...', 100, False);
+                                end;
+                            delay(750);
+                            break;
+                        end;
+                end;
 
-        //     end;
+            end;
     end;
 
 
@@ -146,7 +146,7 @@ procedure parametresJeu(theme: TTheme);
             ClrScr;
 
             if input = 1 then
-                afficherScore('resultat.txt')
+                afficherScore('resultats.txt')
             else if input = 2 then
                 choisirTheme(theme)
             else if input <> 3 then

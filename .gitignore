@@ -4,5 +4,8 @@
 # Autoriser les fichiers source Pascal
 !*.pas
 
+# Ignorer des fichiers source Pascal spécifiques
+test.pas
+
 # Autoriser les dossiers d'organisation
 !*/

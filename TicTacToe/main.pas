@@ -115,7 +115,7 @@ begin
         CursorOn;
         animate('TIC TAC TOE 🎮', 50, True);
         writeln;
-        writeln('1. Nouvelle partie');
+        writeln('1. Lancer une partie');
         writeln('2. Quitter');
         writeln;
         write('>>> ');

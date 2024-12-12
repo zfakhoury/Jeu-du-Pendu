@@ -12,7 +12,7 @@ begin
     repeat
         begin
             ClrScr;
-            animate('Bienvenu au Jeu du Pendu 🫥', 50, True);
+            animate('Jeu du Pendu 🫥', 50, True);
             writeln('');
             writeln('1. Lancer une partie');
             writeln('2. Paramètres');

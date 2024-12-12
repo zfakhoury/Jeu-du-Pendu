@@ -119,7 +119,7 @@ begin
         CursorOff;
         animate('PUISSANCE 4 🎮', 50, True);
         writeln;
-        writeln('1. Nouvelle partie');
+        writeln('1. Lancer une partie');
         writeln('2. Quitter');
         writeln;
         write('>>> ');
