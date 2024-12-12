@@ -162,18 +162,6 @@ procedure partieJeu(mode: TDifficulte);
                 key := ReadKey;
                 
                 case key of
-                    #0:
-                        begin
-                            // Pour l'instant on va uniquement lire les lettres
-
-                            // ch := ReadKey;
-                            // case ch of
-                            // UP: if y > 1 then y := y - 1;
-                            // DOWN: if y < 25 then y := y + 1;
-                            // LEFT: if x > 1 then x := x - 1;
-                            // RIGHT: if x < 80 then x := x + 1;
-                            // end;
-                        end;
                     ESC:
                         begin
                             ClrScr;

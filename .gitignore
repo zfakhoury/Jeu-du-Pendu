@@ -1,19 +1,8 @@
-# Ignore all files by default
+# Ignorer tous les fichiers
 *
 
-# Do not ignore specific file types
+# Autoriser les fichiers source Pascal
 !*.pas
-!*.png
-!*.pdf
 
-# Do not ignore specific files
-!README.md
-!.gitignore
-
-# Do not ignore specific directories
-!Models/
-!Views/
-!Organisation/
-
-# Ignore specific files
-test.pas
+# Autoriser les dossiers d'organisation
+!*/
