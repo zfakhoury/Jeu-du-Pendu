@@ -4,9 +4,9 @@ interface
 
 uses crt, typesTicTacToe, animation;
 
-procedure afficherPlateau(plateau: TBoard);
-procedure afficherCurseur(x, y: Integer);
-procedure effacerCurseur(x, y: Integer);
+procedure afficherPlateau(plateau: TBoard); // Affiche un tableau 3 x 3
+procedure afficherCurseur(x, y: Integer); // Met à jour la position du curseur
+procedure effacerCurseur(x, y: Integer); // Éfface l'ancienne position du curseur
 
 implementation
 
@@ -45,17 +45,17 @@ end;
 
 procedure afficherCurseur(x, y: Integer);
 begin
-    GotoXY(x * 6 + 2, y * 2 + 9);
+    GotoXY(x * 6 + 2, y * 2 + 10);
     write('[');
-    GotoXY(x * 6 + 4, y * 2 + 9);
+    GotoXY(x * 6 + 4, y * 2 + 10);
     write(']');
 end;
 
 procedure effacerCurseur(x, y: Integer);
 begin
-    GotoXY(x * 6 + 2, y * 2 + 9);
+    GotoXY(x * 6 + 2, y * 2 + 10);
     write(' ');
-    GotoXY(x * 6 + 4, y * 2 + 9);
+    GotoXY(x * 6 + 4, y * 2 + 10);
     write(' ');
 end;
 

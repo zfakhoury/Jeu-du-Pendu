@@ -29,7 +29,13 @@ begin
                 end
             else if input = 2 then
                 parametresJeu(theme)
-            else if input <> 3 then
+            else if input = 3 then
+                begin
+                    ClrScr;
+                    animate('Au revoir! 👋', 50, True);
+                    delay(1000);
+                end
+            else
                 begin
                     ClrScr;
                     animate('❌ Saisie incorrecte...', 50, False);

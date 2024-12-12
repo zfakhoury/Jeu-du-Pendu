@@ -4,27 +4,24 @@ interface
 
 uses typesPuissance4;
 
-// Fonctions principales du jeu
-function verifierVictoire(plateau: TPlateau): TEtatJeu;
-function coupValide(plateau: TPlateau; colonne: Integer): Boolean;
-procedure jouerCoup(var plateau: TPlateau; colonne: Integer; joueur: TJoueur);
-function trouverLigne(plateau: TPlateau; colonne: Integer): Integer;
+function verifierVictoire(plateau: TPlateau): TEtatJeu; // Vérifie si un des joueurs a réussi à aligner 4 jetons
+function coupValide(plateau: TPlateau; colonne: Integer): Boolean; // Vérifie la validité du coup (colonne pleine?)
+function trouverLigneLibre(plateau: TPlateau; colonne: Integer): Integer; // Pour trouver la 1ère ligne libre dans une colonne
+procedure jouerCoup(var plateau: TPlateau; colonne: Integer; joueur: TJoueur); // Pour placer le jeton à la position trouvée grâce à trouverLigneLibre()
 
 implementation
 
-function trouverLigne(plateau: TPlateau; colonne: Integer): Integer;
+function trouverLigneLibre(plateau: TPlateau; colonne: Integer): Integer;
 var ligne: Integer;
 begin
-    // Trouve la première position libre dans la colonne (en partant du bas)
     for ligne := 5 downto 0 do
         if plateau[ligne, colonne] = Vide then
             Exit(ligne);
-    trouverLigne := -1;  // Colonne pleine
+    trouverLigneLibre := -1;  // Colonne pleine
 end;
 
 function coupValide(plateau: TPlateau; colonne: Integer): Boolean;
 begin
-    // Vérifie si la colonne est valide et non pleine
     coupValide := (colonne >= 0) and (colonne <= 6) and 
                   (plateau[0, colonne] = Vide);
 end;
@@ -32,8 +29,7 @@ end;
 procedure jouerCoup(var plateau: TPlateau; colonne: Integer; joueur: TJoueur);
 var ligne: Integer;
 begin
-    // Place le jeton dans la première position libre de la colonne
-    ligne := trouverLigne(plateau, colonne);
+    ligne := trouverLigneLibre(plateau, colonne);
     if ligne >= 0 then
         if joueur = JoueurRouge then
             plateau[ligne, colonne] := Rouge
@@ -46,8 +42,13 @@ var
     i, j: Integer;
     plateauPlein: Boolean;
 
-    // Vérifie 4 jetons alignés dans une direction donnée
+    // Vérifie si 4 jetons sont alignés dans une direction donnée (verticale, horizontale ou diagonale)
     function verifierDirection(ligne, col, dLigne, dCol: Integer): Boolean;
+    // Convention des paramètres
+    // dLigne = 1, dCol = 0 : vers le bas
+    // dLigne = 0, dCol = 1 : vers la droite
+    // dLigne = 1, dCol = 1 : en bas à droite
+    // dLigne = 1, dCol = -1 : en bas à gauche
     var 
         count: Integer;
         couleur: TCase;
@@ -56,12 +57,13 @@ var
         if couleur = Vide then Exit(False);
         
         count := 1;
-        // Vérifie dans la direction positive
+        // Vérifie la présence de jetons de la même couleur dans une direction
         while (count < 4) and 
               (ligne + dLigne * count >= 0) and (ligne + dLigne * count <= 5) and
               (col + dCol * count >= 0) and (col + dCol * count <= 6) and
               (plateau[ligne + dLigne * count, col + dCol * count] = couleur) do
-            Inc(count);
+            
+            count := count + 1;
             
         verifierDirection := (count >= 4);
     end;
@@ -69,14 +71,12 @@ var
 begin
     plateauPlein := True;
 
-    // Vérifie toutes les positions possibles
     for i := 0 to 5 do
         for j := 0 to 6 do
         begin
             if plateau[i,j] = Vide then
                 plateauPlein := False;
 
-            // Vérifie horizontal, vertical et les deux diagonales
             if verifierDirection(i, j, 0, 1) or  // Horizontal
                verifierDirection(i, j, 1, 0) or  // Vertical
                verifierDirection(i, j, 1, 1) or  // Diagonale \

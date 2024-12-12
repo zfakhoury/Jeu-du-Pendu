@@ -4,6 +4,7 @@ interface
 
 uses crt;
 
+// Affiche le texte avec un délai donné entre chaque caractère pour un style d'animation
 procedure animate(texte: String; time: Integer; skipLine: Boolean);
 
 implementation

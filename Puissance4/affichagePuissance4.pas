@@ -4,8 +4,8 @@ interface
 
 uses crt, typesPuissance4;
 
-procedure afficherPlateau(plateau: TPlateau);
-procedure afficherCurseur(position: Integer);
+procedure afficherPlateau(plateau: TPlateau); // Affiche un tableau 6 x 7
+procedure afficherCurseur(position: Integer); // Affiche la position du curseur 
 
 implementation
 
@@ -13,13 +13,11 @@ procedure afficherPlateau(plateau: TPlateau);
 var 
     i, j: Integer;
 begin
-    // Affiche les numéros des colonnes
     write('  ');
-    for j := 0 to 6 do
-        write(j+1, '   ');
+    for j := 1 to 7 do
+        write(j, '   ');
     writeln;
     
-    // Affiche le plateau
     for i := 0 to 5 do
     begin
         write('│');
@@ -56,7 +54,6 @@ begin
         end;
     end;
     
-    // Affiche la base du plateau
     write('└');
     for j := 0 to 6 do
     begin

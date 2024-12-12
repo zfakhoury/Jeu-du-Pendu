@@ -4,7 +4,7 @@ interface
 
 Type TPlayer = (JoueurX, JoueurO);
 Type TCell = (Empty, PlayerX, PlayerO);
-Type TBoard = Array[0..2, 0..2] of TCell;
+Type TBoard = Array[0..2, 0..2] of TCell; // Tableau 3 x 3
 Type TGameState = (InProgress, XWins, OWins, Draw);
 
 const UP = #72;

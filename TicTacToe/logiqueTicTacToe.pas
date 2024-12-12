@@ -4,10 +4,10 @@ interface
 
 uses typesTicTacToe;
 
-function verifierVictoire(plateau: TBoard): TGameState;
-function coupValide(plateau: TBoard; x, y: Integer): Boolean;
-procedure jouerCoup(var plateau: TBoard; x, y: Integer; joueur: TPlayer);
-function plateauPlein(plateau: TBoard): Boolean;
+function verifierVictoire(plateau: TBoard): TGameState; // Victoire si un joueur parvient à en aligner 3
+function coupValide(plateau: TBoard; x, y: Integer): Boolean; // Vérifie si un coup est valide (Case vide? Limites du plateau?)
+procedure jouerCoup(var plateau: TBoard; x, y: Integer; joueur: TPlayer); // Place un jeton selon la validité de coup
+function plateauPlein(plateau: TBoard): Boolean; // Vérifie si le plateau en entier est plein
 
 implementation
 

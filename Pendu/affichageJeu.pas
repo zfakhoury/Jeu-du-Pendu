@@ -4,9 +4,10 @@ interface
 
 uses crt, typeDonnees, animation;
 
-procedure afficherMot(valide: Boolean; mot: TMot);
-procedure afficherPendu(tentatives: Integer);
-procedure afficherPressedLettres(key: Char; var pressedKeys: TPressed);
+procedure afficherMot(valide: Boolean; mot: TMot); // Affiche une lettre ou _ selon l'état 
+procedure afficherPendu(tentatives: Integer); // Affiche les chaînes de caractères consituants le pendu
+procedure afficherPressedLettres(key: Char; var pressedKeys: TPressed); // Affiche les lettres qui ont déjà été utilisées
+
 implementation
 
 procedure afficherPressedLettres(key: Char; var pressedKeys: TPressed);

@@ -4,14 +4,14 @@ interface
 
 uses typeDonnees, affichageJeu, dictionnaire, crt, sysUtils, animation;
 
-procedure partieJeu(mode: TDifficulte);
-function initMot(mode: TDifficulte): TMot;
-procedure modeDifficulte(var mode: TDifficulte);
-function entreeValide(key: Char; mot: TMot): Boolean;
-procedure updateTMot(key: Char; var mot: TMot);
-procedure updateTentatives(valide: Boolean; key: Char; pressedKeys: TPressed; var tentatives: Integer);
-function partieGagnee(mot: TMot): Boolean;
-procedure saveResultat(resultat: TResultat);
+procedure partieJeu(mode: TDifficulte); // Vue principale du jeu
+function initMot(mode: TDifficulte): TMot; // Prépare un mot à partir du fichier dictionnaire.pas
+procedure modeDifficulte(var mode: TDifficulte); // Choix de difficulté
+function entreeValide(key: Char; mot: TMot): Boolean; // Vérifie la justesse de l'entrée (touche déjà appuyée? Exclusion des nombres, etc.)
+procedure updateTMot(key: Char; var mot: TMot); // Mettre à jour le mot 
+procedure updateTentatives(valide: Boolean; key: Char; pressedKeys: TPressed; var tentatives: Integer); // Met à jour le nombre de tentatives selon la validité de la touche appuyée 
+function partieGagnee(mot: TMot): Boolean; // Vérifie si la partie a été gagnée ou pas
+procedure saveResultat(resultat: TResultat); // Enregistre les résultats dans un fichier texte (historique du jeu)
 
 implementation
 
