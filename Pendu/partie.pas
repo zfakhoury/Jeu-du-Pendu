@@ -73,13 +73,6 @@ procedure modeDifficulte(var mode: TDifficulte);
             write('Niveau: ');
             read(input);
 
-            case input of
-                1: mode := facile;
-                2: mode := moyen;
-            else
-                mode := difficile;
-            end;
-
             if input = 1 then
                 mode := facile
             else if input = 2 then
