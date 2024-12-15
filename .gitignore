@@ -1,9 +1,10 @@
 # Ignorer tous les fichiers
 *
 
-# Autoriser les fichiers source Pascal et png
+# Autoriser les fichiers source Pascal, PNG et PDF
 !*.pas
 !*.png
+!*.pdf
 
 # Ignorer des fichiers source Pascal spécifiques
 test.pas
